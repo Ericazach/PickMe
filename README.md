@@ -1,6 +1,6 @@
- <h1 style="color: DarkSlateBlue">PickMe App</h1>
+ # <h1 style="color: DarkSlateBlue">PickMe App</h1>
 
- <p style="text-align: center">Bored with the same old routine? Choose your own adventure every day
+ ## <p style="text-align: center">Bored with the same old routine? Choose your own adventure every day
   with our app! Three unique options await, ready to spice up your
   life.</p> 
 
