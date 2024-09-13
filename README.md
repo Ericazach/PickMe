@@ -8,7 +8,7 @@
 ## Used languages
 
 <div align="left">
-  <img src="https://res.cloudinary.com/dmpxijzou/image/upload/v1726228869/react-native-1_had7i2.svg" height="40" alt="react native logo"  />
+  <img src="https://res.cloudinary.com/dmpxijzou/image/upload/v1726228869/react-native-1_had7i2.svg" height="60" alt="react native logo"  />
   <img width="12" />
 
 </div>
