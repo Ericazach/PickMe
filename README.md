@@ -4,9 +4,9 @@
 ![659shots_so](https://github.com/user-attachments/assets/12a573aa-af52-4431-bd84-a9224a4800c7)
 
 
-## I coded with
+<h3 align="center"> I coded with </h3>
 
-<div align="left">
+<div align="center">
   <img src="https://res.cloudinary.com/dmpxijzou/image/upload/v1726228869/react-native-1_had7i2.svg" height="70" alt="react native logo"  />
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/appwrite/appwrite-original-wordmark.svg" height="70" alt="appwrite logo"  />
