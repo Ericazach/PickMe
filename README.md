@@ -4,7 +4,9 @@
 ![659shots_so](https://github.com/user-attachments/assets/12a573aa-af52-4431-bd84-a9224a4800c7)
 
 
-# <h3 align="left"> 👩🏻‍💻 I coded with </h3>
+# <h2 align="left"> 👩🏻‍💻 I coded with </h2>
+
+##
 
 <div align="left">
   <img src="https://res.cloudinary.com/dmpxijzou/image/upload/v1726228869/react-native-1_had7i2.svg" height="70" alt="react native logo"  />
