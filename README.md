@@ -3,7 +3,7 @@
 
 ![659shots_so](https://github.com/user-attachments/assets/12a573aa-af52-4431-bd84-a9224a4800c7)
 
-# <h2 align="left"> 🚀 About </h2>
+# <h2 align="left"> 🎯 About </h2>
 
 <h4>Ever been on a trip and hit that classic question: “What do we do today?” Well, I’ve got just the thing! Meet PickMe, the app that turns indecision into excitement. With PickMe, you get three activity options, and the one with the most votes becomes the adventure of the day! 🎉 Built entirely with React Native (my first time using it!), and powered by Appwrite for the database, creating this app was an epic mix of challenges, learning, and a whole lot of fun. I’m thrilled with how it turned out—now, every day on your trip is a new adventure! 🚀</h4>
 
