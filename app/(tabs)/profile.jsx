@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import {
   ScrollView,
   Text,
@@ -21,7 +21,7 @@ import useAppwrite from "../../lib/useAppwrite";
 export default function Profile() {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(() => getUserPosts(user.$id));
-
+  const router = useRouter();
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
@@ -45,11 +45,13 @@ export default function Profile() {
           keyExtractor={(item) => item.$id}
           renderItem={({ item }) => {
             return (
-              <View>
-                <Text className="text-2xl self-center uppercase mt-10 mb-4 text-gray-100 font-pbold">
-                  {item.title}
-                </Text>
-              </View>
+              <TouchableOpacity onPress={() => router.push(`/${item.$id}`)}>
+                <View>
+                  <Text className="text-2xl self-center uppercase mt-10 mb-4 text-gray-100 font-pbold">
+                    {item.title}
+                  </Text>
+                </View>
+              </TouchableOpacity>
             );
           }}
           ListHeaderComponent={
