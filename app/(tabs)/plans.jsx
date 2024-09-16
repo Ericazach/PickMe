@@ -21,7 +21,7 @@ const Plans = () => {
           </Text>
           <View className="w-full px-4 mt-10">
             <Text className="text-2xl self-center uppercase mt-10 mb-4 text-gray-100 font-pbold">
-              {posts?.[1]?.title}
+              {posts?.[0]?.title}
             </Text>
 
             <CustomButton
