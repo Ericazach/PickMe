@@ -1,12 +1,51 @@
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import { Screen } from "../../components/Screen";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import { useGlobalContext } from "../../context/GlobalProvider";
 import FormField from "../../components/FormField";
 import { CustomButton } from "../../components/CustomButton";
 import { router } from "expo-router";
+import { useState } from "react";
+import { createActivity } from "../../lib/appwrite";
 
 export default function Star() {
+  const { user } = useGlobalContext();
+  const [form, setForm] = useState({
+    title: "",
+    planOne: "",
+    planTwo: "",
+    planThree: "",
+  });
+
+  const handleSubmit = async () => {
+    if (
+      (form.title === "") |
+      (form.planOne === "") |
+      (form.planTwo === "") |
+      (form.planThree === "")
+    ) {
+      return Alert.alert("Please provide all fields");
+    }
+
+    try {
+      await createActivity({
+        ...form,
+        userId: user.$id,
+      });
+      Alert.alert("Success", "Post uploaded successfully");
+      router.push("/plans");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    } finally {
+      setForm({
+        title: "",
+        planOne: "",
+        planTwo: "",
+        planThree: "",
+      });
+    }
+  };
+
   return (
     <Screen>
       <SafeAreaView>
@@ -17,9 +56,9 @@ export default function Star() {
           <Text className="text-xl text-white font-pbold">Mission title?</Text>
           <FormField
             title=""
-            value=""
+            value={form.title}
             placeholder="Enter a mission title"
-            handleChangeText={() => {}}
+            handleChangeText={(e) => setForm({ ...form, title: e })}
             otherStyles="mb-4"
           />
 
@@ -31,29 +70,29 @@ export default function Star() {
           </Text>
           <FormField
             title=""
-            value=""
+            value={form.planOne}
             placeholder="Name of this path?"
-            handleChangeText={() => {}}
+            handleChangeText={(e) => setForm({ ...form, planOne: e })}
             otherStyles="mb-4"
           />
           <FormField
             title=""
-            value=""
+            value={form.planTwo}
             placeholder="Name of this path?"
-            handleChangeText={() => {}}
+            handleChangeText={(e) => setForm({ ...form, planTwo: e })}
             otherStyles="mb-4"
           />
           <FormField
             title=""
-            value=""
+            value={form.planThree}
             placeholder="Name of this path?"
-            handleChangeText={() => {}}
+            handleChangeText={(e) => setForm({ ...form, planThree: e })}
             otherStyles="mb-4"
           />
 
           <CustomButton
             title="Plan it!"
-            onPress={() => router.push("/star")}
+            onPress={handleSubmit}
             customStyles={"mt-10 bg-[#387180]"}
             customStylesText="font-pbold"
           />

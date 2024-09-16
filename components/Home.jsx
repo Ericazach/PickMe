@@ -27,7 +27,7 @@ export function Home() {
             life.
           </Text>
 
-          <CustomButton
+          <CustomButton 
             title={"Continue with email"}
             customStyles={"mt-6 bg-[#387180]"}
             customStylesText="font-psemibold"

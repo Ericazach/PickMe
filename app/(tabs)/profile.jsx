@@ -8,6 +8,7 @@ import { signOut } from "../../lib/appwrite";
 import DataForm from "../../components/DataForm";
 import { CustomButton } from "../../components/CustomButton";
 
+
 export default function Profile() {
   const { user, setUser, setIsLoggedIn } = useGlobalContext();
   const logout = async () => {
