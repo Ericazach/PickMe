@@ -45,13 +45,16 @@ export default function Profile() {
           keyExtractor={(item) => item.$id}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity onPress={() => router.push(`/${item.$id}`)}>
-                <View>
-                  <Text className="text-2xl self-center uppercase mt-10 mb-4 text-gray-100 font-pbold">
+              <View className="px-4">
+                <TouchableOpacity
+                  onPress={() => router.push(`/${item.$id}`)}
+                  className="w-full border bg-gray-600 rounded-lg my-1.5 border-gray-400 dark:text-gray-400 items-center justify-center"
+                >
+                  <Text className="text-xl uppercase py-4 text-gray-100 font-pbold">
                     {item.title}
                   </Text>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              </View>
             );
           }}
           ListHeaderComponent={
@@ -67,7 +70,6 @@ export default function Profile() {
                     className="w-6 h-6"
                   />
                 </TouchableOpacity>
-
                 <View className="w-20 h-20 border border-gray-100 rounded-full flex justify-center items-center">
                   <Image
                     source={{ uri: user?.avatar }}
@@ -85,12 +87,9 @@ export default function Profile() {
                   customStyles={"mt-4 bg-gray-400"}
                   customStylesText="font-pbold"
                 />
-                <CustomButton
-                  title="My plans"
-                  onPress={() => router.push("/edit-profile")}
-                  customStyles={"mt-4 bg-gray-400"}
-                  customStylesText="font-pbold"
-                />
+                <Text className="self-center mt-7 mb-4 text-2xl uppercase underline  text-gray-300 font-pextrabold">
+                  My Plans
+                </Text>
               </View>
             </>
           }

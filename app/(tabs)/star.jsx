@@ -33,7 +33,7 @@ export default function Star() {
         userId: user.$id,
       });
       Alert.alert("Success", "Post uploaded successfully");
-      router.push("/plans");
+      router.push("/profile");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
