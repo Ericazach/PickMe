@@ -10,7 +10,6 @@ import { CustomButton } from "../components/CustomButton";
 const ItemDetail = () => {
   const { id } = useLocalSearchParams()
   const { data: post, refetch } = useAppwrite(() => getActivityById(id));
-  console.log(post);
 
   // useEffect(() => {
   //   refetch();
@@ -20,10 +19,10 @@ const ItemDetail = () => {
     <Screen>
       <SafeAreaView className="">
         <ScrollView>
-          <Text className="self-center text-3xl uppercase text-gray-400 font-pextrabold ">
+          <Text className="self-center text-3xl uppercase text-gray-400 font-pextrabold">
             Ready, Set, Select!
           </Text>
-          <View className="w-full px-4 ">
+          <View className="w-full px-4">
             <Text className="text-2xl self-center uppercase mt-10 mb-4 text-gray-100 font-pbold">
               {post?.title}
             </Text>
@@ -50,6 +49,12 @@ const ItemDetail = () => {
               title="Seal the deal!"
               onPress={() => router.push("/star")}
               customStyles={"mt-10 bg-[#387180]"}
+              customStylesText="font-pbold uppercase"
+            />
+            <CustomButton
+              title="Back to home"
+              onPress={() => router.push("/home")}
+              customStyles={"mt-4 bg-gray-400"}
               customStylesText="font-pbold uppercase"
             />
           </View>
