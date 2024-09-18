@@ -48,7 +48,13 @@ const ItemDetail = () => {
             <CustomButton
               title="Seal the deal!"
               onPress={() => router.push("/star")}
-              customStyles={"mt-10 bg-[#387180]"}
+              customStyles={"mt-10 bg-[#387180]"}r
+              customStylesText="font-pbold uppercase"
+            />
+            <CustomButton
+              title="Edit Plan"
+              onPress={() => router.push(`/edit-Activity/${post.$id}`)}
+              customStyles={"mt-4 bg-gray-400"}
               customStylesText="font-pbold uppercase"
             />
             <CustomButton

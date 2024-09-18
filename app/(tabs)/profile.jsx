@@ -48,7 +48,7 @@ export default function Profile() {
               <View className="px-4">
                 <TouchableOpacity
                   onPress={() => router.push(`/${item.$id}`)}
-                  className="w-full border bg-gray-600 rounded-lg my-1.5 border-gray-400 dark:text-gray-400 items-center justify-center"
+                  className="w-full  bg-gray-600 rounded-lg my-1.5 border-b-4 border-r-4 border-gray-400 items-center justify-center"
                 >
                   <Text className="text-xl uppercase py-4 text-gray-100 font-pbold">
                     {item.title}
