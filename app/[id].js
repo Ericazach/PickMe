@@ -1,11 +1,13 @@
 import { router, useLocalSearchParams, useRouter } from 'expo-router';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
 import useAppwrite from '../lib/useAppwrite';
-import { getActivityById } from '../lib/appwrite';
-import { useEffect } from 'react';
+import { getActivityById, deleteActivity } from '../lib/appwrite';
+import { icons } from '../constants';
 import { Screen } from '../components/Screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CustomButton } from "../components/CustomButton";
+
+
 
 const ItemDetail = () => {
   const { id } = useLocalSearchParams()
@@ -15,6 +17,18 @@ const ItemDetail = () => {
   //   refetch();
   // }, [id]);
 
+  const handleDelete = async () => {
+    try {
+      await deleteActivity(id);
+      router.push("/profile");
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+    finally {
+      router.push("/profile");
+    }
+  }
+
   return (
     <Screen>
       <SafeAreaView className="">
@@ -22,10 +36,22 @@ const ItemDetail = () => {
           <Text className="self-center text-3xl uppercase text-gray-400 font-pextrabold">
             Ready, Set, Select!
           </Text>
-          <View className="w-full px-4">
-            <Text className="text-2xl self-center uppercase mt-10 mb-4 text-gray-100 font-pbold">
-              {post?.title}
-            </Text>
+          <View className="w-full mt-7 px-4">
+            <View className="flex-row justify-between ">
+              <Text className="text-2xl px-2 self-center uppercase mb-4 text-gray-100 font-pbold">
+                {post?.title}
+              </Text>
+              <TouchableOpacity
+                onPress={handleDelete}
+                className="self-center"
+              >
+                <Image
+                  source={icons.trash}
+                  resizeMode="contain"
+                  className="w-10 h-10"
+                />
+              </TouchableOpacity>
+            </View>
 
             <CustomButton
               title={post?.activity1}
