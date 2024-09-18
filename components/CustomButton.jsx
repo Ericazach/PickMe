@@ -8,7 +8,7 @@ export function CustomButton({
 }) {
   return (
     <Pressable
-      className={`w-full py-4 rounded-xl ${customStyles}`}
+      className={`py-4 rounded-xl ${customStyles}`}
       onPress={onPress}
     >
       <Text

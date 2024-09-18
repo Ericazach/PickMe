@@ -84,8 +84,8 @@ export default function Profile() {
                 <CustomButton
                   title="Edit Profile"
                   onPress={() => router.push("/edit-profile")}
-                  customStyles={"mt-4 bg-gray-400"}
-                  customStylesText="font-pbold"
+                  customStyles={"mt-4 bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center "}
+                  customStylesText="font-pbold uppercase"
                 />
                 <Text className="self-center mt-7 mb-4 text-2xl uppercase underline  text-gray-300 font-pextrabold">
                   My Plans

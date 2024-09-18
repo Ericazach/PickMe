@@ -27,9 +27,9 @@ export function Home() {
             life.
           </Text>
 
-          <CustomButton 
+          <CustomButton
             title={"Continue with email"}
-            customStyles={"mt-6 bg-[#387180]"}
+            customStyles={"mt-6 bg-[#387180] w-full"}
             customStylesText="font-psemibold"
             onPress={() => router.push("/sign-in")}
           />

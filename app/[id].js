@@ -29,40 +29,42 @@ const ItemDetail = () => {
 
             <CustomButton
               title={post?.activity1}
-              customStyles="border-[1px] border-[#FF3864] py-7 mt-5"
+              customStyles="border-[1px] border-[#FF3864] py-7 mt-5 border-b-4 border-r-4 border-b-4 border-r-4 items-center items-center"
               customStylesText="text-2xl text-gray-400 font-psemibold "
               onPress={() => { }}
             />
             <CustomButton
               title={post?.activity2}
-              customStyles="border-[1px] border-[#F39C6B] my-5 py-7"
+              customStyles="border-[1px] border-[#F39C6B] my-5 py-7 border-b-4 border-r-4 items-center"
               customStylesText="text-2xl text-gray-400 font-psemibold "
               onPress={() => { }}
             />
             <CustomButton
               title={post?.activity3}
-              customStyles="border-[1px] border-[#CC978E]  py-7 mt-3"
+              customStyles="border-[1px] border-[#CC978E] border-b-4 border-r-4 py-7 mt-3"
               customStylesText="text-2xl text-gray-400 font-psemibold "
               onPress={() => { }}
             />
             <CustomButton
               title="Seal the deal!"
               onPress={() => router.push("/star")}
-              customStyles={"mt-10 bg-[#387180]"}r
+              customStyles={"mt-10 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}
               customStylesText="font-pbold uppercase"
             />
-            <CustomButton
-              title="Edit Plan"
-              onPress={() => router.push(`/edit-Activity/${post.$id}`)}
-              customStyles={"mt-4 bg-gray-400"}
-              customStylesText="font-pbold uppercase"
-            />
-            <CustomButton
-              title="Back to home"
-              onPress={() => router.push("/home")}
-              customStyles={"mt-4 bg-gray-400"}
-              customStylesText="font-pbold uppercase"
-            />
+            <View className="flex-row mt-4 justify-evenly">
+              <CustomButton
+                title="Edit it!"
+                onPress={() => router.push(`/edit-Activity/${post.$id}`)}
+                customStyles={"mx-1 grow bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center"}
+                customStylesText="font-pbold uppercase"
+              />
+              <CustomButton
+                title="Back "
+                onPress={() => router.push("/home")}
+                customStyles={"mx-1 grow bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center "}
+                customStylesText="font-pbold uppercase"
+              />
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>

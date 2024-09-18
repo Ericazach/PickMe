@@ -93,8 +93,8 @@ export default function Star() {
           <CustomButton
             title="Plan it!"
             onPress={handleSubmit}
-            customStyles={"mt-10 bg-[#387180]"}
-            customStylesText="font-pbold"
+            customStyles={"mt-10 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}
+            customStylesText="font-pbold uppercase"
           />
         </ScrollView>
       </SafeAreaView>

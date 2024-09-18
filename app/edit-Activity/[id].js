@@ -92,13 +92,20 @@ export default function editPlan() {
             handleChangeText={(e) => setForm({ ...form, planThree: e })}
             otherStyles="mb-4"
           />
-
-          <CustomButton
-            title="Plan it!"
-            onPress={handleSubmit}
-            customStyles={"mt-10 bg-[#387180]"}
-            customStylesText="font-pbold"
-          />
+          <View className="flex-row mt-4 justify-evenly">
+            <CustomButton
+              title="Edit it!"
+              onPress={handleSubmit}
+              customStyles={"bg-[#387180] mx-1 grow border-b-4 border-r-4 border-gray-700"}
+              customStylesText="font-pbold uppercase"
+            />
+            <CustomButton
+              title="Back!"
+              onPress={() => router.push("/profile")}
+              customStyles={"bg-gray-400 mx-1 grow border-b-4 border-r-4 border-gray-700"}
+              customStylesText="font-pbold uppercase"
+            />
+          </View>
         </ScrollView>
       </SafeAreaView>
     </Screen>

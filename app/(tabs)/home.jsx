@@ -32,7 +32,7 @@ const Home = () => {
 
         <View className=" items-center justify-center rounded-2xl">
           <Text className="text-gray-100 text-2xl mb-4  font-pbold">
-          What's the quest for today?
+            What's the quest for today?
           </Text>
         </View>
         <View>
@@ -42,8 +42,8 @@ const Home = () => {
           <CustomButton
             title="Create Plan"
             onPress={() => router.push("/star")}
-            customStyles={"mt-10 bg-[#387180]"}
-            customStylesText="font-pbold"
+            customStyles={"mt-10 bg-[#387180]  border-b-4 border-r-4 border-gray-700 items-center "}
+            customStylesText="font-pbold uppercase"
           />
         </View>
       </ScrollView>
