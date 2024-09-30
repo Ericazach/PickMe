@@ -14,6 +14,9 @@ const ItemDetail = () => {
   const { id } = useLocalSearchParams()
   const { data: post, refetch } = useAppwrite(() => getActivityById(id));
 
+  const activities = [post?.activity1, post?.activity2, post?.activity3];
+  console.log(activities)
+
   // useEffect(() => {
   //   refetch();
   // }, [id]);
@@ -24,24 +27,23 @@ const ItemDetail = () => {
       "Do you want to ditch this awesome plan?",
       [
         {
-          text: "Cancelar", // Botón de cancelar
-          onPress: () => console.log("Eliminación cancelada"),
-          style: "cancel", // Estilo que lo coloca a la izquierda (cancelación)
+          text: "Cancel",
+          style: "cancel",
         },
         {
-          text: "Eliminar", // Botón de confirmación
+          text: "Delete",
           onPress: async () => {
             try {
-              await deleteActivity(id); // Ejecuta la función para eliminar
-              router.push("/profile"); // Redirige a la página de perfil
+              await deleteActivity(id);
+              router.push("/profile");
             } catch (error) {
-              Alert.alert("Error", error.message); // Muestra un error si algo sale mal
+              Alert.alert("Error", error.message);
             }
           },
-          style: "destructive", // Estilo que lo resalta en rojo (acción destructiva)
+          style: "destructive",
         }
       ],
-      { cancelable: true } // Permite cerrar el alert al tocar fuera del cuadro de diálogo
+      { cancelable: true }
     );
   };
 
