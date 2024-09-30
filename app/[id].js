@@ -6,6 +6,7 @@ import { icons } from '../constants';
 import { Screen } from '../components/Screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CustomButton } from "../components/CustomButton";
+import { Alert } from 'react-native';
 
 
 
@@ -18,16 +19,31 @@ const ItemDetail = () => {
   // }, [id]);
 
   const handleDelete = async () => {
-    try {
-      await deleteActivity(id);
-      router.push("/profile");
-    } catch (error) {
-      Alert.alert("Error", error.message);
-    }
-    finally {
-      router.push("/profile");
-    }
-  }
+    Alert.alert(
+      "Wait, are you sure?",
+      "Do you want to ditch this awesome plan?",
+      [
+        {
+          text: "Cancelar", // Botón de cancelar
+          onPress: () => console.log("Eliminación cancelada"),
+          style: "cancel", // Estilo que lo coloca a la izquierda (cancelación)
+        },
+        {
+          text: "Eliminar", // Botón de confirmación
+          onPress: async () => {
+            try {
+              await deleteActivity(id); // Ejecuta la función para eliminar
+              router.push("/profile"); // Redirige a la página de perfil
+            } catch (error) {
+              Alert.alert("Error", error.message); // Muestra un error si algo sale mal
+            }
+          },
+          style: "destructive", // Estilo que lo resalta en rojo (acción destructiva)
+        }
+      ],
+      { cancelable: true } // Permite cerrar el alert al tocar fuera del cuadro de diálogo
+    );
+  };
 
   return (
     <Screen>
@@ -85,7 +101,7 @@ const ItemDetail = () => {
                 customStylesText="font-pbold uppercase"
               />
               <CustomButton
-                title="Back "
+                title="Back!"
                 onPress={() => router.push("/home")}
                 customStyles={"mx-1 grow bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center "}
                 customStylesText="font-pbold uppercase"
