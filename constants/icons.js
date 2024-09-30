@@ -12,6 +12,10 @@ import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import trash from "../assets/icons/trash-bin.png"
+import edit from "../assets/icons/edit.png"
+import back from "../assets/icons/back.png"
+import pick from "../assets/icons/pick.png"
+import again from "../assets/icons/again.png"
 
 export default {
   play,
@@ -27,5 +31,9 @@ export default {
   logout,
   eyeHide,
   eye,
-  trash
+  trash,
+  edit,
+  back,
+  pick,
+  again
 };

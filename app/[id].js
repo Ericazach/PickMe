@@ -7,11 +7,8 @@ import { Screen } from '../components/Screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CustomButton } from "../components/CustomButton";
 import { Alert } from 'react-native';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import * as Animatable from "react-native-animatable";
-
-
-
 
 const ItemDetail = () => {
   const { id } = useLocalSearchParams()
@@ -22,7 +19,6 @@ const ItemDetail = () => {
     post?.activity2,
     post?.activity3,
   ];
-  console.log(activities[1]);
 
   const activity1Ref = useRef(null);
   const activity2Ref = useRef(null);
@@ -39,17 +35,26 @@ const ItemDetail = () => {
     activity3Ref.current?.stopAnimation();
 
     if (picked === activities[0]) {
-      activity1Ref.current?.zoomIn(800);
+      await activity1Ref.current?.zoomIn(800);
+      activity2Ref.current?.zoomOut(800);
+      activity3Ref.current?.zoomOut(800);
     } else if (picked === activities[1]) {
-      activity2Ref.current?.zoomIn(800);
+      await activity2Ref.current?.zoomIn(800);
+      activity1Ref.current?.zoomOut(800);
+      activity3Ref.current?.zoomOut(800);
     } else if (picked === activities[2]) {
-      activity3Ref.current?.zoomIn(800);
+      await activity3Ref.current?.zoomIn(800);
+      activity1Ref.current?.zoomOut(800);
+      activity2Ref.current?.zoomOut(800);
     }
   };
 
-  // useEffect(() => {
-  //   refetch();
-  // }, [id]);
+
+  const handleAgain = async () => {
+    activity1Ref.current?.stopAnimation();
+    activity2Ref.current?.stopAnimation();
+    activity3Ref.current?.stopAnimation();
+  }
 
   const handleDelete = async () => {
     Alert.alert(
@@ -89,16 +94,38 @@ const ItemDetail = () => {
               <Text className="text-2xl px-2 self-center uppercase mb-4 text-gray-100 font-pbold">
                 {post?.title}
               </Text>
-              <TouchableOpacity
-                onPress={handleDelete}
-                className="self-center"
-              >
-                <Image
-                  source={icons.trash}
-                  resizeMode="contain"
-                  className="w-10 h-10"
-                />
-              </TouchableOpacity>
+              <View className="flex-row gap-2">
+                <TouchableOpacity
+                  onPress={() => router.push(`/edit-Activity/${post.$id}`)}
+                  className="self-center"
+                >
+                  <Image
+                    source={icons.edit}
+                    resizeMode="contain"
+                    className="w-10 h-10"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={handleDelete}
+                  className="self-center"
+                >
+                  <Image
+                    source={icons.trash}
+                    resizeMode="contain"
+                    className="w-10 h-10"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => router.push("/home")}
+                  className="self-center"
+                >
+                  <Image
+                    source={icons.back}
+                    resizeMode="contain"
+                    className="w-10 h-10"
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
             <Animatable.View
               ref={activity1Ref}>
@@ -124,22 +151,45 @@ const ItemDetail = () => {
               ref={activity3Ref}>
               <CustomButton
                 title={post?.activity3}
-                customStyles="border-[1px] border-[#CC978E] border-b-4 border-r-4 py-7 mt-3"
+                customStyles="border-[1px] border-[#6073d1] border-b-4 border-r-4 py-7 mt-3"
                 customStylesText="text-2xl text-gray-400 font-psemibold "
                 onPress={() => { }}
               />
             </Animatable.View>
-
-            <Animatable.View
-              ref={pickBtn}>
-              <CustomButton
+            <View className="flex-row justify-evenly items-center">
+              <Animatable.View
+                ref={pickBtn}>
+                {/* <CustomButton
                 title="Seal the deal!"
                 onPress={handlePick}
-                customStyles={"mt-10 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}
+                customStyles={"mt-10 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}r
                 customStylesText="font-pbold uppercase"
-              />
-            </Animatable.View>
-            <View className="flex-row mt-4 justify-evenly">
+              /> */}
+                <TouchableOpacity
+                  onPress={handlePick}
+                  className=""
+                >
+                  <Image
+                    source={icons.pick}
+                    resizeMode="contain"
+                    className="w-28 h-28 mt-8"
+                  />
+                </TouchableOpacity>
+              </Animatable.View>
+              <TouchableOpacity
+                onPress={handleAgain}
+                className=""
+              >
+                <Image
+                  source={icons.again}
+                  resizeMode="contain"
+                  className="w-[130px] h-[130px] mt-8"
+                />
+              </TouchableOpacity>
+            </View>
+
+
+            {/* <View className="flex-row mt-4 justify-evenly">
               <CustomButton
                 title="Edit it!"
                 onPress={() => router.push(`/edit-Activity/${post.$id}`)}
@@ -152,7 +202,7 @@ const ItemDetail = () => {
                 customStyles={"mx-1 grow bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center "}
                 customStylesText="font-pbold uppercase"
               />
-            </View>
+            </View> */}
           </View>
         </ScrollView>
       </SafeAreaView>
