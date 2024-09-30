@@ -50,10 +50,10 @@ export default function Star() {
     <Screen>
       <SafeAreaView>
         <ScrollView className="px-4 my-7">
-          <Text className="text-3xl my-5 mb-10 uppercase text-gray-400 font-pextrabold">
+          <Text className="text-[50px] my-5 mb-10 text-gray-200 font-caveat">
             Let's make a plan!
           </Text>
-          <Text className="text-xl text-white font-pbold">Mission title?</Text>
+          <Text className="text-2xl text-white font-playwrite">Mission title?</Text>
           <FormField
             title=""
             value={form.title}
@@ -62,10 +62,10 @@ export default function Star() {
             otherStyles="mb-4"
           />
 
-          <Text className="text-xl text-white font-pbold mt-3 ">
+          <Text className="text-2xl text-white font-playwrite mt-3 ">
             Adventures
           </Text>
-          <Text className="text-sm text-gray-100 font-pregular ">
+          <Text className="text-sm text-gray-100 font-pmedium ">
             minimum of three adventures
           </Text>
           <FormField
@@ -91,10 +91,10 @@ export default function Star() {
           />
 
           <CustomButton
-            title="Plan it!"
+            title="Plan it!..."
             onPress={handleSubmit}
-            customStyles={"mt-10 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}
-            customStylesText="font-pbold uppercase"
+            customStyles={"mt-6 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}
+            customStylesText="font-caveat text-4xl"
           />
         </ScrollView>
       </SafeAreaView>

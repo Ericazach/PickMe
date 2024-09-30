@@ -15,6 +15,8 @@ export default function Layout() {
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
+    "Caveat-SemiNold": require("../assets/fonts/Caveat-SemiBold.ttf"),
+    "PlaywriteDKUloop": require("../assets/fonts/PlaywriteDKUloopet-ExtraLight.ttf"),
   });
 
   useEffect(() => {

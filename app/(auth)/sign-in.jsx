@@ -45,7 +45,7 @@ const SignIn = () => {
             source={require("../../assets/images/logo2.png")}
             className="w-[150px] h-[150px] self-center"
           />
-          <Text className="text-white text-xl font-psemibold text-semibold self-start">
+          <Text className="text-white text-xl font-psemibold self-start">
             Log In to PickMe
           </Text>
 
@@ -67,7 +67,7 @@ const SignIn = () => {
             title="Log In"
             onPress={submit}
             customStyles={"mt-10 bg-[#387180]"}
-            customStylesText="font-psemibold"
+            customStylesText="font-caveat text-4xl"
           />
 
           <View className="flex-row justify-center gap-2 mt-0">

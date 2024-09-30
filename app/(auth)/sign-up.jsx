@@ -71,7 +71,7 @@ const SignUp = () => {
             title="Sign Up"
             onPress={submit}
             customStyles={"mt-10 bg-[#387180]"}
-            customStylesText="font-psemibold"
+            customStylesText="font-caveat text-4xl"
           />
 
           <View className="flex-row justify-center gap-2 mt-0">

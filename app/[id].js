@@ -86,12 +86,12 @@ const ItemDetail = () => {
     <Screen>
       <SafeAreaView className="">
         <ScrollView>
-          <Text className="self-center text-3xl uppercase text-gray-400 font-pextrabold">
-            Ready, Set, Select!
+          <Text className="self-center text-[55px]  text-gray-200 font-caveat">
+            Ready, Set, Pick...
           </Text>
           <View className="w-full mt-7 px-4">
             <View className="flex-row justify-between ">
-              <Text className="text-2xl px-2 self-center uppercase mb-4 text-gray-100 font-pbold">
+              <Text className="text-[33px] px-2 self-center mt-5 mb-4 text-gray-100 font-playwrite">
                 {post?.title}
               </Text>
               <View className="flex-row gap-2">
@@ -132,7 +132,7 @@ const ItemDetail = () => {
               <CustomButton
                 title={post?.activity1}
                 customStyles="border-[1px] border-[#FF3864] py-7 mt-5 border-b-4 border-r-4 border-b-4 border-r-4 items-center items-center"
-                customStylesText="text-2xl text-gray-400 font-psemibold "
+                customStylesText="text-2xl text-gray-400 font-medium"
                 onPress={() => { }}
               />
             </Animatable.View>
@@ -142,7 +142,7 @@ const ItemDetail = () => {
               <CustomButton
                 title={post?.activity2}
                 customStyles="border-[1px] border-[#F39C6B] my-5 py-7 border-b-4 border-r-4 items-center"
-                customStylesText="text-2xl text-gray-400 font-psemibold "
+                customStylesText="text-2xl text-gray-400 font-medium "
                 onPress={() => { }}
               />
             </Animatable.View>
@@ -152,7 +152,7 @@ const ItemDetail = () => {
               <CustomButton
                 title={post?.activity3}
                 customStyles="border-[1px] border-[#6073d1] border-b-4 border-r-4 py-7 mt-3"
-                customStylesText="text-2xl text-gray-400 font-psemibold "
+                customStylesText="text-2xl text-gray-400 font-medium "
                 onPress={() => { }}
               />
             </Animatable.View>
