@@ -46,14 +46,14 @@ export default function Profile() {
           renderItem={({ item }) => {
             return (
               <View className="px-4">
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() => router.push(`/${item.$id}`)}
                   className="w-full  bg-gray-600 rounded-lg my-1.5 border-b-4 border-r-4 border-gray-400 items-center justify-center"
                 >
                   <Text className="text-2xl  py-4 text-gray-100 font-playwrite">
                     {item.title}
                   </Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </View>
             );
           }}
@@ -84,12 +84,14 @@ export default function Profile() {
                 <CustomButton
                   title="Edit Profile..."
                   onPress={() => router.push("/edit-profile")}
-                  customStyles={"mt-4 bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center "}
+                  customStyles={
+                    "mt-7 bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center "
+                  }
                   customStylesText="font-caveat text-4xl"
                 />
-                <Text className="self-center mt-7 mb-4 text-4xl  underline  text-gray-300 font-caveat">
+                {/* <Text className="self-center mt-7 mb-4 text-4xl  underline  text-gray-300 font-caveat">
                   My Plans...
-                </Text>
+                </Text> */}
               </View>
             </>
           }

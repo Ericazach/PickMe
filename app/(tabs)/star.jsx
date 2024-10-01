@@ -33,7 +33,7 @@ export default function Star() {
         userId: user.$id,
       });
       Alert.alert("Success", "Post uploaded successfully");
-      router.push("/profile");
+      router.push("/plans");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
@@ -48,12 +48,14 @@ export default function Star() {
 
   return (
     <Screen>
-      <SafeAreaView>
-        <ScrollView className="px-4 my-7">
+      <SafeAreaView className="h-full ">
+        <View className="px-4 h-full">
           <Text className="text-[50px] my-5 mb-10 text-gray-200 font-caveat">
             Let's make a plan!
           </Text>
-          <Text className="text-2xl text-white font-playwrite">Mission title?</Text>
+          <Text className="text-2xl text-white font-playwrite">
+            Mission title?
+          </Text>
           <FormField
             title=""
             value={form.title}
@@ -93,10 +95,12 @@ export default function Star() {
           <CustomButton
             title="Plan it!..."
             onPress={handleSubmit}
-            customStyles={"mt-6 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}
+            customStyles={
+              "mt-6 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "
+            }
             customStylesText="font-caveat text-4xl"
           />
-        </ScrollView>
+        </View>
       </SafeAreaView>
     </Screen>
   );

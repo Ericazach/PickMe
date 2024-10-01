@@ -1,11 +1,18 @@
-import { Image, ScrollView, Text, TouchableOpacity, View } from "react-native";
-import React, { useRef } from "react";
+import {
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+  RefreshControl,
+  Alert,
+} from "react-native";
+import React, { useState } from "react";
 import { Screen } from "../../components/Screen";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { CustomButton } from "../../components/CustomButton";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import useAppwrite from "../../lib/useAppwrite";
-import { getUserPosts } from "../../lib/appwrite";
+import { getUserPosts, deleteActivity } from "../../lib/appwrite";
 import { router } from "expo-router";
 import { icons } from "../../constants";
 import * as Animatable from "react-native-animatable";
@@ -13,100 +20,107 @@ import * as Animatable from "react-native-animatable";
 const Plans = () => {
   const { user } = useGlobalContext();
   const { data: posts, refetch } = useAppwrite(() => getUserPosts(user.$id));
+  const [refreshing, setRefreshing] = useState(false);
 
-  const activities = [
-    posts?.[0]?.activity1,
-    posts?.[0]?.activity2,
-    posts?.[0]?.activity3,
-  ];
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
 
-  const activity1Ref = useRef(null);
-  const activity2Ref = useRef(null);
-  const activity3Ref = useRef(null);
-  const sealTheDealBtn = useRef(null);
-
-  const handlePick = async () => {
-    await sealTheDealBtn.current?.flash(2000);
-
-    const picked = activities[Math.floor(Math.random() * activities.length)];
-
-    activity1Ref.current?.stopAnimation();
-    activity2Ref.current?.stopAnimation();
-    activity3Ref.current?.stopAnimation();
-
-    if (picked === activities[0]) {
-      activity1Ref.current?.zoomIn(800);
-    } else if (picked === activities[1]) {
-      activity2Ref.current?.zoomIn(800);
-    } else if (picked === activities[2]) {
-      activity3Ref.current?.zoomIn(800);
-    }
+  const handleDelete = async (activityId) => {
+    Alert.alert(
+      "Wait, are you sure?",
+      "Do you want to ditch this awesome plan?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          onPress: async () => {
+            try {
+              await deleteActivity(activityId);
+              const updatedPosts = posts.filter(
+                (post) => post.$id !== activityId
+              );
+              refetch(updatedPosts);
+            } catch (error) {
+              Alert.alert("Error", error.message);
+            }
+          },
+          style: "destructive",
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   return (
     <Screen>
-      <SafeAreaView className="">
-        <ScrollView>
-          <Animatable.View animation="slideInDown">
-            <Text className="self-center text-3xl uppercase text-gray-400 font-pextrabold mt-10">
-              Ready, Set, Select!
-            </Text>
-
-            <View className="px-4 mt-10">
-              <View className="flex-row justify-between ">
-                <Text className="text-2xl text-center uppercase mb-4 text-gray-100 font-pbold">
-                  {posts?.[0]?.title}
+      <SafeAreaView className="h-full">
+        <View className="h-full">
+          <FlatList
+            data={posts}
+            keyExtractor={(item) => item.$id}
+            renderItem={({ item }) => {
+              return (
+                <View className="px-4">
+                  <TouchableOpacity
+                    className="flex-row justify-between px-4 py-4 my-2 bg-black-200 rounded-2xl border border-gray-600"
+                    onPress={() => router.push(`/${item.$id}`)}
+                  >
+                    <Text className="text-2xl px-2 self-center mt-5 mb-4 text-gray-200 font-playwrite">
+                      {item?.title}
+                    </Text>
+                    <TouchableOpacity className="flex-row gap-2">
+                      <TouchableOpacity
+                        onPress={() =>
+                          router.push(`/edit-Activity/${item.$id}`)
+                        }
+                        className="self-center"
+                      >
+                        <Image
+                          source={icons.edit}
+                          resizeMode="contain"
+                          className="w-10 h-10"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => handleDelete(item.$id)}
+                        className="self-center"
+                      >
+                        <Image
+                          source={icons.trash}
+                          resizeMode="contain"
+                          className="w-10 h-10"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => router.push("/home")}
+                        className="self-center"
+                      >
+                        <Image
+                          source={icons.back}
+                          resizeMode="contain"
+                          className="w-10 h-10"
+                        />
+                      </TouchableOpacity>
+                    </TouchableOpacity>
+                  </TouchableOpacity>
+                </View>
+              );
+            }}
+            ListHeaderComponent={
+              <View className="px-4 mt-7 mb-7">
+                <Text className="text-[55px] text-center text-gray-100 font-caveat">
+                  Plans!
                 </Text>
-                <TouchableOpacity
-                  onPress={() => router.push("/")}
-                  className="self-center"
-                >
-                  <Image
-                    source={icons.trash}
-                    resizeMode="contain"
-                    className="w-10 h-10"
-                  />
-                </TouchableOpacity>
               </View>
-
-              <Animatable.View ref={activity1Ref}>
-                <CustomButton
-                  title={posts?.[0]?.activity1}
-                  customStyles="border-[1px] border-[#FF3864] py-7 mt-5"
-                  customStylesText="text-2xl text-gray-400 font-psemibold "
-                  onPress={() => {}}
-                />
-              </Animatable.View>
-
-              <Animatable.View ref={activity2Ref}>
-                <CustomButton
-                  title={posts?.[0]?.activity2}
-                  customStyles="border-[1px] border-[#F39C6B] my-5 py-7"
-                  customStylesText="text-2xl text-gray-400 font-psemibold "
-                  onPress={() => {}}
-                />
-              </Animatable.View>
-
-              <Animatable.View ref={activity3Ref}>
-                <CustomButton
-                  title={posts?.[0]?.activity3}
-                  customStyles="border-[1px] border-[#CC978E] py-7 mt-3"
-                  customStylesText="text-2xl text-gray-400 font-psemibold "
-                  onPress={() => {}}
-                />
-              </Animatable.View>
-
-              <Animatable.View ref={sealTheDealBtn}>
-                <CustomButton
-                  title="Pick!"
-                  onPress={handlePick}
-                  customStyles={"mt-10 bg-[#387180]"}
-                  customStylesText="font-pbold uppercase"
-                />
-              </Animatable.View>
-            </View>
-          </Animatable.View>
-        </ScrollView>
+            }
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+          />
+        </View>
       </SafeAreaView>
     </Screen>
   );

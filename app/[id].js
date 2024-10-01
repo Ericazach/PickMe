@@ -1,18 +1,19 @@
-import { router, useLocalSearchParams, useRouter } from 'expo-router';
-import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { useState, useRef } from 'react';
+import { router, useLocalSearchParams } from 'expo-router';
+import { View, Text, ScrollView, Image, TouchableOpacity, Alert } from 'react-native';
 import useAppwrite from '../lib/useAppwrite';
 import { getActivityById, deleteActivity } from '../lib/appwrite';
 import { icons } from '../constants';
 import { Screen } from '../components/Screen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CustomButton } from "../components/CustomButton";
-import { Alert } from 'react-native';
-import { useEffect, useRef } from 'react';
 import * as Animatable from "react-native-animatable";
 
 const ItemDetail = () => {
-  const { id } = useLocalSearchParams()
-  const { data: post, refetch } = useAppwrite(() => getActivityById(id));
+  const { id } = useLocalSearchParams();
+  const { data: post } = useAppwrite(() => getActivityById(id));
+
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const activities = [
     post?.activity1,
@@ -26,6 +27,8 @@ const ItemDetail = () => {
   const pickBtn = useRef(null);
 
   const handlePick = async () => {
+    setIsDisabled(true);
+
     await pickBtn.current?.flash(2000);
 
     const picked = activities[Math.floor(Math.random() * activities.length)];
@@ -49,28 +52,25 @@ const ItemDetail = () => {
     }
   };
 
-
   const handleAgain = async () => {
+    setIsDisabled(false);
     activity1Ref.current?.stopAnimation();
     activity2Ref.current?.stopAnimation();
     activity3Ref.current?.stopAnimation();
-  }
+  };
 
   const handleDelete = async () => {
     Alert.alert(
       "Wait, are you sure?",
       "Do you want to ditch this awesome plan?",
       [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
+        { text: "Cancel", style: "cancel" },
         {
           text: "Delete",
           onPress: async () => {
             try {
               await deleteActivity(id);
-              router.push("/profile");
+              router.push("/plans");
             } catch (error) {
               Alert.alert("Error", error.message);
             }
@@ -84,13 +84,13 @@ const ItemDetail = () => {
 
   return (
     <Screen>
-      <SafeAreaView className="">
+      <SafeAreaView>
         <ScrollView>
-          <Text className="self-center text-[55px]  text-gray-200 font-caveat">
+          <Text className="self-center text-[55px] text-gray-200 font-caveat">
             Ready, Set, Pick...
           </Text>
           <View className="w-full mt-7 px-4">
-            <View className="flex-row justify-between ">
+            <View className="flex-row justify-between">
               <Text className="text-[33px] px-2 self-center mt-5 mb-4 text-gray-100 font-playwrite">
                 {post?.title}
               </Text>
@@ -116,7 +116,7 @@ const ItemDetail = () => {
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => router.push("/home")}
+                  onPress={() => router.push("/plans")}
                   className="self-center"
                 >
                   <Image
@@ -127,47 +127,38 @@ const ItemDetail = () => {
                 </TouchableOpacity>
               </View>
             </View>
-            <Animatable.View
-              ref={activity1Ref}>
+
+            <Animatable.View ref={activity1Ref}>
               <CustomButton
                 title={post?.activity1}
-                customStyles="border-[1px] border-[#FF3864] py-7 mt-5 border-b-4 border-r-4 border-b-4 border-r-4 items-center items-center"
+                customStyles="border-[1px] border-[#FF3864] py-7 mt-5"
+                customStylesText="text-2xl text-gray-400 font-medium"
+                onPress={() => { }}
+              />
+            </Animatable.View>
+            <Animatable.View ref={activity2Ref}>
+              <CustomButton
+                title={post?.activity2}
+                customStyles="border-[1px] border-[#F39C6B] my-5 py-7"
+                customStylesText="text-2xl text-gray-400 font-medium"
+                onPress={() => { }}
+              />
+            </Animatable.View>
+            <Animatable.View ref={activity3Ref}>
+              <CustomButton
+                title={post?.activity3}
+                customStyles="border-[1px] border-[#6073d1] py-7 mt-3"
                 customStylesText="text-2xl text-gray-400 font-medium"
                 onPress={() => { }}
               />
             </Animatable.View>
 
-            <Animatable.View
-              ref={activity2Ref}>
-              <CustomButton
-                title={post?.activity2}
-                customStyles="border-[1px] border-[#F39C6B] my-5 py-7 border-b-4 border-r-4 items-center"
-                customStylesText="text-2xl text-gray-400 font-medium "
-                onPress={() => { }}
-              />
-            </Animatable.View>
-
-            <Animatable.View
-              ref={activity3Ref}>
-              <CustomButton
-                title={post?.activity3}
-                customStyles="border-[1px] border-[#6073d1] border-b-4 border-r-4 py-7 mt-3"
-                customStylesText="text-2xl text-gray-400 font-medium "
-                onPress={() => { }}
-              />
-            </Animatable.View>
             <View className="flex-row justify-evenly items-center">
-              <Animatable.View
-                ref={pickBtn}>
-                {/* <CustomButton
-                title="Seal the deal!"
-                onPress={handlePick}
-                customStyles={"mt-10 bg-[#387180] border-b-4 border-r-4 border-gray-700 items-center "}r
-                customStylesText="font-pbold uppercase"
-              /> */}
+              <Animatable.View ref={pickBtn}>
                 <TouchableOpacity
                   onPress={handlePick}
-                  className=""
+                  disabled={isDisabled}
+                  className={`${isDisabled ? 'opacity-20' : ''}`}
                 >
                   <Image
                     source={icons.pick}
@@ -178,7 +169,6 @@ const ItemDetail = () => {
               </Animatable.View>
               <TouchableOpacity
                 onPress={handleAgain}
-                className=""
               >
                 <Image
                   source={icons.again}
@@ -187,22 +177,6 @@ const ItemDetail = () => {
                 />
               </TouchableOpacity>
             </View>
-
-
-            {/* <View className="flex-row mt-4 justify-evenly">
-              <CustomButton
-                title="Edit it!"
-                onPress={() => router.push(`/edit-Activity/${post.$id}`)}
-                customStyles={"mx-1 grow bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center"}
-                customStylesText="font-pbold uppercase"
-              />
-              <CustomButton
-                title="Back!"
-                onPress={() => router.push("/home")}
-                customStyles={"mx-1 grow bg-gray-400 border-b-4 border-r-4 border-gray-600 items-center "}
-                customStylesText="font-pbold uppercase"
-              />
-            </View> */}
           </View>
         </ScrollView>
       </SafeAreaView>
