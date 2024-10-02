@@ -66,66 +66,66 @@ export default function EditPlan() {
 
   return (
     <Screen>
-      <SafeAreaView>
-        <ScrollView className="px-4">
-          <Text className="text-[45px] my-5 mb-10  text-gray-200 font-caveat">
-            Customize your journey!
-          </Text>
+      {/* <SafeAreaView className="flex-1"> */}
+      <ScrollView className="px-4 ">
+        <Text className="text-[45px] my-5 mb-10  text-gray-200 font-caveat">
+          Customize your journey!
+        </Text>
 
-          <Text className="text-xl text-white font-playwrite">Mission title?</Text>
-          <FormField
-            title=""
-            value={form.title}
-            placeholder="Enter the title"
-            handleChangeText={(e) => setForm({ ...form, title: e })}
-            otherStyles="mb-4"
+        <Text className="text-xl text-white font-playwrite">Mission title?</Text>
+        <FormField
+          title=""
+          value={form.title}
+          placeholder="Enter the title"
+          handleChangeText={(e) => setForm({ ...form, title: e })}
+          otherStyles="mb-4"
+        />
+
+        <Text className="text-xl text-white font-playwrite  mt-3">Adventures</Text>
+        <Text className="text-sm text-gray-100 font-pregular">
+          Minimum of three adventures
+        </Text>
+
+        <FormField
+          title=""
+          value={form.planOne}
+          placeholder="First adventure"
+          handleChangeText={(e) => setForm({ ...form, planOne: e })}
+          otherStyles="mb-4"
+        />
+
+        <FormField
+          title=""
+          value={form.planTwo}
+          placeholder="Second adventure"
+          handleChangeText={(e) => setForm({ ...form, planTwo: e })}
+          otherStyles="mb-4"
+        />
+
+        <FormField
+          title=""
+          value={form.planThree}
+          placeholder="Third adventure"
+          handleChangeText={(e) => setForm({ ...form, planThree: e })}
+          otherStyles="mb-4"
+        />
+
+        <View className="flex-row mt-4 justify-evenly">
+          <CustomButton
+            title="Change it!"
+            onPress={handleSubmit}
+            customStyles="bg-[#387180] mx-1 grow border-b-4 border-r-4 border-gray-700"
+            customStylesText="font-caveat text-4xl"
           />
-
-          <Text className="text-xl text-white font-playwrite  mt-3">Adventures</Text>
-          <Text className="text-sm text-gray-100 font-pregular">
-            Minimum of three adventures
-          </Text>
-
-          <FormField
-            title=""
-            value={form.planOne}
-            placeholder="First adventure"
-            handleChangeText={(e) => setForm({ ...form, planOne: e })}
-            otherStyles="mb-4"
+          <CustomButton
+            title="Back!"
+            onPress={() => router.push("/plans")}
+            customStyles="bg-gray-400 mx-1 grow border-b-4 border-r-4 border-gray-700"
+            customStylesText="font-caveat text-4xl"
           />
-
-          <FormField
-            title=""
-            value={form.planTwo}
-            placeholder="Second adventure"
-            handleChangeText={(e) => setForm({ ...form, planTwo: e })}
-            otherStyles="mb-4"
-          />
-
-          <FormField
-            title=""
-            value={form.planThree}
-            placeholder="Third adventure"
-            handleChangeText={(e) => setForm({ ...form, planThree: e })}
-            otherStyles="mb-4"
-          />
-
-          <View className="flex-row mt-4 justify-evenly">
-            <CustomButton
-              title="Change it!"
-              onPress={handleSubmit}
-              customStyles="bg-[#387180] mx-1 grow border-b-4 border-r-4 border-gray-700"
-              customStylesText="font-caveat text-4xl"
-            />
-            <CustomButton
-              title="Back!"
-              onPress={() => router.push("/plans")}
-              customStyles="bg-gray-400 mx-1 grow border-b-4 border-r-4 border-gray-700"
-              customStylesText="font-caveat text-4xl"
-            />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+        </View>
+      </ScrollView>
+      {/* </SafeAreaView> */}
     </Screen>
   );
 }

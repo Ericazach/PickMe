@@ -2,6 +2,7 @@ import { Image, ScrollView, Text, View } from "react-native";
 import { Screen } from "../../components/Screen";
 import { useGlobalContext } from "../../context/GlobalProvider";
 import { CustomButton } from "../../components/CustomButton";
+import * as Animatable from "react-native-animatable";
 
 import ImageRender from "../../components/ImageRender";
 import { Link, router } from "expo-router";
@@ -31,9 +32,11 @@ const Home = () => {
         </View>
 
         <View className=" items-center justify-center rounded-2xl">
-          <Text className="text-gray-100 text-4xl mb-4  font-caveat">
-            What's the quest for today?...
-          </Text>
+          <Animatable.View animation="zoomIn" duration={1500}>
+            <Text className="text-gray-100 text-4xl mb-4  font-caveat">
+              What's the quest for today?...
+            </Text>
+          </Animatable.View>
         </View>
         <View>
           <ImageRender />
@@ -42,7 +45,9 @@ const Home = () => {
           <CustomButton
             title="Create Plan!..."
             onPress={() => router.push("/star")}
-            customStyles={"mt-10 bg-[#387180]  border-b-4 border-r-4 border-gray-700 items-center "}
+            customStyles={
+              "mt-10 bg-[#387180]  border-b-4 border-r-4 border-gray-700 items-center "
+            }
             customStylesText="font-caveat text-4xl"
           />
         </View>

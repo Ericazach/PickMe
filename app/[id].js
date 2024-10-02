@@ -31,7 +31,14 @@ const ItemDetail = () => {
 
     await pickBtn.current?.flash(2000);
 
-    const picked = activities[Math.floor(Math.random() * activities.length)];
+    // Shuffle the activities array each time the button is pressed
+    const shuffledActivities = activities
+      .map(value => ({ value, random: Math.random() })) // Create an array of objects with random values
+      .sort((a, b) => a.random - b.random) // Sort based on the random values
+      .map(({ value }) => value); // Extract the shuffled values back into an array
+
+    // Pick the first activity from the shuffled array
+    const picked = shuffledActivities[0];
 
     activity1Ref.current?.stopAnimation();
     activity2Ref.current?.stopAnimation();
@@ -50,6 +57,8 @@ const ItemDetail = () => {
       activity1Ref.current?.zoomOut(800);
       activity2Ref.current?.zoomOut(800);
     }
+
+
   };
 
   const handleAgain = async () => {
@@ -86,9 +95,11 @@ const ItemDetail = () => {
     <Screen>
       <SafeAreaView>
         <ScrollView>
-          <Text className="self-center text-[55px] text-gray-200 font-caveat">
-            Ready, Set, Pick...
-          </Text>
+          <Animatable.View animation="lightSpeedIn" duration={1500}>
+            <Text className="self-center text-[55px] text-gray-200 font-caveat">
+              Ready, Set, Pick...
+            </Text>
+          </Animatable.View>
           <View className="w-full mt-7 px-4">
             <View className="flex-row justify-between">
               <Text className="text-[33px] px-2 self-center mt-5 mb-4 text-gray-100 font-playwrite">

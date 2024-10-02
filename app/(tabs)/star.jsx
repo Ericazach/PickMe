@@ -7,6 +7,7 @@ import { CustomButton } from "../../components/CustomButton";
 import { router } from "expo-router";
 import { useState } from "react";
 import { createActivity } from "../../lib/appwrite";
+import * as Animatable from "react-native-animatable";
 
 export default function Star() {
   const { user } = useGlobalContext();
@@ -49,10 +50,12 @@ export default function Star() {
   return (
     <Screen>
       <SafeAreaView className="h-full ">
-        <View className="px-4 h-full">
-          <Text className="text-[50px] my-5 mb-10 text-gray-200 font-caveat">
-            Let's make a plan!
-          </Text>
+        <View className="px-4 h-full mt-4">
+          <Animatable.View animation="lightSpeedIn" duration={1000}>
+            <Text className="text-[50px] my-5 mb-10 text-gray-200 font-caveat">
+              Let's make a plan!
+            </Text>
+          </Animatable.View>
           <Text className="text-2xl text-white font-playwrite">
             Mission title?
           </Text>
